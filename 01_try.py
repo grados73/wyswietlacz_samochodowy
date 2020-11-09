@@ -4,7 +4,7 @@ from kivy.uix.image import Image
 class MainApp(App):
     def build(self):
         img = Image(source='D:\Projekty\wyswietlacz_samochodowy\calosc.png',
-                    size_hint=(1, .5),
+                    size_hint=(1, 1),
                     pos_hint={'center_x':.5, 'center_y':.5})
 
         return img
