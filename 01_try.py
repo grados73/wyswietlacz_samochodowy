@@ -1,10 +1,14 @@
-import kivy
 from kivy.app import App
-from kivy.uix.label import Label
+from kivy.uix.image import Image
 
-class MyApp(App):
+class MainApp(App):
     def build(self):
-        return Label(text="Hello Kamil!")
+        img = Image(source='D:\Projekty\wyswietlacz_samochodowy\calosc.png',
+                    size_hint=(1, .5),
+                    pos_hint={'center_x':.5, 'center_y':.5})
 
-if __name__ == "__main__":
-    MyApp().run()
+        return img
+
+if __name__ == '__main__':
+    app = MainApp()
+    app.run()
