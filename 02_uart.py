@@ -12,13 +12,14 @@ class MainApp(App):
                     pos_hint={'center_x':.5, 'center_y':.5})
 
         return img
+    def tryb_jazdy(self, tryb):
+        
 
 if __name__ == '__main__':
     app = MainApp()
     app.run()
 
 while True:
-    if(ser.in_waiting > 0):
-        line = ser.readline()
-        a_string = line.decode("utf-8")
-        print(a_string)
+        if(ser.in_waiting > 0):
+                line = ser.readline()
+                print(line)
