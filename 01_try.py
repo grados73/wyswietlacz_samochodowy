@@ -4,6 +4,7 @@ from kivy.uix.image import Image
 import serial
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
+oldNum = 1
 
 class MainApp(App):
     def build(self):
@@ -20,5 +21,11 @@ if __name__ == '__main__':
 while True:
     if(ser.in_waiting > 0):
         line = ser.readline()
-        a_string = line.decode("utf-8")
-        print(a_string)
+        a_string = line.decode("utf-8") ##zmiana typu z bytes na string
+        for i in a_string:
+            if(i == '\r' or i =='\n' or i == '\r\n' or i == ' '): ##omijam znaki nowej lini
+                continue
+            num = int(a_string.rstrip()) ## ucinam spacje i zmieniam na int
+        if (oldNum != num): ##jezli sie cos zmienilo
+            print(num)
+            oldNum = num
