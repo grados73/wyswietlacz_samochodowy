@@ -1,0 +1,26 @@
+
+FloatLayout:
+    tribe:  tribe
+    background: background
+    Background:
+        id: background
+        canvas.before:
+            Rectangle:
+                size:   self.size
+                pos:    self.pos
+                source: "D:\Projekty\wyswietlacz_samochodowy\png\display_layout_background.jpg"
+    Tribe:
+        id: tribe
+        canvas.before:
+            Rectangle:
+                size: 100, 100
+                pos: 600, 400
+                texture: self.tribe_texture
+            Rectangle:
+                size: 150, 290
+                pos: 400, 200
+                texture: self.speed_texture1
+            Rectangle:
+                size: 150, 290
+                pos: 200, 200
+                texture: self.speed_texture10
