@@ -25,6 +25,8 @@ class Tribe(Widget):
     tribe_textureR = ObjectProperty(None)
     speed_texture1 = ObjectProperty(None)
     speed_texture10 = ObjectProperty(None)
+    turn_left = ObjectProperty(None)
+    turn_right = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -34,6 +36,8 @@ class Tribe(Widget):
         self.tribe_textureR = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture #TRYBY JAZDY
         self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture #PREDKOSC WARTOSC JEDNOSCI
         self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture #PREDKOSC WARTOSC DZIESIĄTEK
+        self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_left.jpg").texture #
+        self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture #
 
     def zmien_tryb(self, time_passed):
         licznik = 1
@@ -131,6 +135,19 @@ class Tribe(Widget):
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_8.png").texture
                 elif jednosci == 9:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_9.png").texture
+        #KIERUNKOWSKAZY
+            elif num == 51: #prawy kierunkowskaz on
+                self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\kturn_right.png").texture
+            elif num == 50: #prawy kierunkowskaz off
+                self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture
+            elif num == 61: # lewy kierunkowskaz on
+                self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\kturn_left.png").texture
+            elif num == 60: #lewy kierunkowskaz off
+                self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture
+
+
+
+
 
 class MainApp(App):
     def on_start(self):
