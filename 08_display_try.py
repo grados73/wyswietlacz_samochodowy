@@ -20,14 +20,18 @@ class Background(Widget):
 
 
 class Tribe(Widget):
-    tribe_texture = ObjectProperty(None)
+    tribe_textureN = ObjectProperty(None)
+    tribe_textureD = ObjectProperty(None)
+    tribe_textureR = ObjectProperty(None)
     speed_texture1 = ObjectProperty(None)
     speed_texture10 = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # create texture INICJALIZACJA
-        self.tribe_texture = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\EN_active.png").texture #TRYBY JAZDY
+        self.tribe_textureN = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\EN_active.png").texture #TRYBY JAZDY
+        self.tribe_textureD = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture #TRYBY JAZDY
+        self.tribe_textureR = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture #TRYBY JAZDY
         self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture #PREDKOSC WARTOSC JEDNOSCI
         self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture #PREDKOSC WARTOSC DZIESIĄTEK
 
@@ -49,11 +53,17 @@ class Tribe(Widget):
 ## CZĘŚĆ DOTYCZĄCA RYSOWANIA NA WYSWIETLACZU - REAGOWANIE NA OTRZYMANE WIADOMOSCI
     ## ZMIANA TRYBÓW JAZDY
             if num == 401: #TRYB D
-                self.tribe_texture = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\D_active.png").texture
+                self.tribe_textureD = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\D_active.png").texture
+                self.tribe_textureN = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture
+                self.tribe_textureR = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture
             elif num == 411: #TRYB N
-                self.tribe_texture = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\EN_active.png").texture
+                self.tribe_textureN = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\EN_active.png").texture
+                self.tribe_textureD = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture
+                self.tribe_textureR = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture
             elif num == 410: #TRYB R
-                self.tribe_texture = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\R_active.png").texture
+                self.tribe_textureR = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\R_active.png").texture
+                self.tribe_textureN = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture
+                self.tribe_textureD = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture
     ##ZMIANA PRĘDKOSCI
         #WARTOSCI OD 0 DO 10 KM /H
             if num >=200 and num <= 209:
