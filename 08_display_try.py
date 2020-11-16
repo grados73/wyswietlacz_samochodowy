@@ -27,6 +27,8 @@ class Tribe(Widget):
     speed_texture10 = ObjectProperty(None)
     turn_left = ObjectProperty(None)
     turn_right = ObjectProperty(None)
+    light_day = ObjectProperty(None)
+    battery_lvl = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -36,8 +38,10 @@ class Tribe(Widget):
         self.tribe_textureR = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_tribe.jpg").texture #TRYBY JAZDY
         self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture #PREDKOSC WARTOSC JEDNOSCI
         self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture #PREDKOSC WARTOSC DZIESIĄTEK
-        self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_left.jpg").texture #
-        self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture #
+        self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_left.jpg").texture #KIERUNKOWSKAZ LEWY
+        self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture #KIERUNKOWSKAZ PRAWY
+        self.light_day = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_lights.jpg").texture #ŚWIATŁA
+        self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_battery.jpg").texture  #BATERIA
 
     def zmien_tryb(self, time_passed):
         licznik = 1
@@ -144,14 +148,43 @@ class Tribe(Widget):
                 self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\kturn_left.png").texture
             elif num == 60: #lewy kierunkowskaz off
                 self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture
-
-
-
-
+        #ŚWIATŁA
+            elif num == 71: #włącz światła
+                self.light_day = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\lights.png").texture
+            elif num == 70: #wyłącz światła
+                self.light_day = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_lights.jpg").texture
+        #BATERIA
+            elif num >= 300 and num <= 399:
+                if num >= 392:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_7.png").texture
+                elif num >= 385:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_6half.png").texture
+                elif num >= 378:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_6.png").texture
+                elif num >= 371:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_5half.png").texture
+                elif num >= 364:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_5.png").texture
+                elif num >= 357:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_4half.png").texture
+                elif num >= 350:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_4.png").texture
+                elif num >= 343:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_3half.png").texture
+                elif num >= 336:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_3.png").texture
+                elif num >= 329:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_2half.png").texture
+                elif num >= 322:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_2.png").texture
+                elif num >= 315:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_1half.png").texture
+                else:
+                    self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\pbattery_1.png").texture
 
 class MainApp(App):
     def on_start(self):
-        Clock.schedule_interval(self.root.ids.tribe.zmien_tryb, 1 / 10)
+        Clock.schedule_interval(self.root.ids.tribe.zmien_tryb, 1 / 200)
 #        Clock.schedule_interval(self.root.ids.speed.zmien_predkosc, 1 / 10)
         pass
 
