@@ -7,8 +7,8 @@ from kivy.uix.image import Image
 from kivy.clock import Clock
 import serial
 
-ser = serial.Serial('COM3', baudrate=9600, timeout=1)
-oldNum = 0
+ser = serial.Serial('/dev/ttyACM1', 9600)
+oldNum = 1
 
 
 class Background(Widget):
@@ -29,6 +29,9 @@ class Tribe(Widget):
     turn_right = ObjectProperty(None)
     light_day = ObjectProperty(None)
     battery_lvl = ObjectProperty(None)
+    distance1 = ObjectProperty(None)
+    distance10 = ObjectProperty(None)
+    distance100 = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -42,6 +45,10 @@ class Tribe(Widget):
         self.turn_right = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_turn_right.jpg").texture #KIERUNKOWSKAZ PRAWY
         self.light_day = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_lights.jpg").texture #ŚWIATŁA
         self.battery_lvl = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_battery.jpg").texture  #BATERIA
+        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  #DYSTANS JEDNOSCI
+        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  #DYSTANS DZIESIATKI
+        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  #DYSTANS SETKI
+       
 
     def zmien_tryb(self, time_passed):
         licznik = 1
@@ -147,7 +154,7 @@ class Tribe(Widget):
             elif num == 61: # lewy kierunkowskaz on
                 self.turn_left = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/kturn_left.png").texture
             elif num == 60: #lewy kierunkowskaz off
-                self.turn_left = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_turn_right.jpg").texture
+                self.turn_left = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_turn_left.jpg").texture
         #ŚWIATŁA
             elif num == 71: #włącz światła
                 self.light_day = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/lights.png").texture
@@ -181,6 +188,72 @@ class Tribe(Widget):
                     self.battery_lvl = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/pbattery_1half.png").texture
                 else:
                     self.battery_lvl = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/pbattery_1.png").texture
+        #PRZEBYTY DYSTANS
+            elif num >=8000 and num <= 8999:
+            #SETKI
+                    setki = num-8000
+                    if setki >= 900:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_9.png").texture  # DYSTANS SETKI
+                    elif setki >= 800:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_8.png").texture  # DYSTANS SETKI
+                    elif setki >= 700:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_7.png").texture  # DYSTANS SETKI
+                    elif setki >= 600:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_6.png").texture  # DYSTANS SETKI
+                    elif setki >= 500:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_5.png").texture  # DYSTANS SETKI
+                    elif setki >= 400:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_4.png").texture  # DYSTANS SETKI
+                    elif setki >= 300:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_3.png").texture  # DYSTANS SETK
+                    elif setki >= 200:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_2.png").texture  # DYSTANS SETKI
+                    elif setki >= 100:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_1.png").texture  # DYSTANS SETKI
+                    else:
+                        self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS SETKI
+                    dziesiatki = setki % 100
+                    if dziesiatki >= 90:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_9.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 80:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_8.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 70:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_7.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 60:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_6.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 50:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_5.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 40:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_4.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 30:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_3.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 20:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_2.png").texture  # DYSTANS dziesiatki
+                    elif dziesiatki >= 10:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_1.png").texture  # DYSTANS dziesiatki
+                    else:
+                        self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS dziesiatki
+                    jedn = dziesiatki % 10
+                    if jedn == 9:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_9.png").texture  # DYSTANS jedn
+                    elif jedn == 8:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_8.png").texture  # DYSTANS jedn
+                    elif jedn == 7:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_7.png").texture  # DYSTANS jedn
+                    elif jedn == 6:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_6.png").texture  # DYSTANS jedn
+                    elif jedn == 5:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_5.png").texture  # DYSTANS jedn
+                    elif jedn == 4:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_4.png").texture  # DYSTANS jedn
+                    elif jedn == 3:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_3.png").texture  # DYSTANS jedn
+                    elif jedn == 2:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_2.png").texture  # DYSTANS jedn
+                    elif jedn == 1:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_1.png").texture  # DYSTANS jedn
+                    else:
+                        self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS jedn
 
 class MainApp(App):
     def on_start(self):
