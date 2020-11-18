@@ -7,7 +7,7 @@ from kivy.uix.image import Image
 from kivy.clock import Clock
 import serial
 
-ser = serial.Serial('/dev/ttyACM1', 9600)
+ser = serial.Serial('/dev/ttyACM0', 9600)
 oldNum = 1
 
 
@@ -254,6 +254,20 @@ class Tribe(Widget):
                         self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/distance_1.png").texture  # DYSTANS jedn
                     else:
                         self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS jedn
+        #RESET PARAMETRÓW
+            elif num == 90:
+                self.tribe_textureN = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/EN_active.png").texture  # TRYBY JAZDY
+                self.tribe_textureD = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_tribe.jpg").texture  # TRYBY JAZDY
+                self.tribe_textureR = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_tribe.jpg").texture  # TRYBY JAZDY
+                self.speed_texture1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/speed_0.png").texture  # PREDKOSC WARTOSC JEDNOSCI
+                self.speed_texture10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/speed_0.png").texture  # PREDKOSC WARTOSC DZIESIĄTEK
+                self.turn_left = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_turn_left.jpg").texture  # KIERUNKOWSKAZ LEWY
+                self.turn_right = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_turn_right.jpg").texture  # KIERUNKOWSKAZ PRAWY
+                self.light_day = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_lights.jpg").texture  # ŚWIATŁA
+                self.battery_lvl = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_battery.jpg").texture  # BATERIA
+                self.distance1 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS JEDNOSCI
+                self.distance10 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS DZIESIATKI
+                self.distance100 = Image(source="/home/pi/Documents/kivv/wyswietlacz_samochodowy-main/png/empty_distance.jpg").texture  # DYSTANS SETKI
 
 class MainApp(App):
     def on_start(self):
