@@ -11,6 +11,7 @@ from kivy.lang import Builder
 
 ser = serial.Serial('COM3', baudrate=9600, timeout=1)
 oldNum = 0
+global cv
 cv = 0
 
 
@@ -36,6 +37,8 @@ class Tribe(Widget, App):
     distance10 = ObjectProperty(None)
     distance100 = ObjectProperty(None)
     angle = NumericProperty(0)
+    global cv
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -50,11 +53,18 @@ class Tribe(Widget, App):
         self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture #KIERUNKOWSKAZ PRAWY
         self.light_day = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_lights.jpg").texture #ŚWIATŁA
         self.battery_lvl = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_battery.jpg").texture  #BATERIA
+        self.distance1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_distance.jpg").texture
+        self.distance10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_distance.jpg").texture
+        self.distance100 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_distance.jpg").texture
 
     def zmien_tryb(self, time_passed):
         licznik = 1
         oldNum = 0
         num = 0
+        flaga1 = 0
+        katOtrzymany = 0
+        global cv
+
 ## cześć dotycząca obrabiania danych z uart
         if (ser.in_waiting > 0):
             line = ser.readline()
@@ -87,79 +97,106 @@ class Tribe(Widget, App):
                 self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture
                 if num == 200:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture
-                    self.angle = 0
-                    global cv
-                    cv=1
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 201:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_1.png").texture
-                    self.angle = 10
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 202:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_2.png").texture
-                    self.angle = 20
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 203:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_3.png").texture
-                    self.angle = 30
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 204:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_4.png").texture
-                    self.angle = 40
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 205:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_5.png").texture
-                    self.angle = 50
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 206:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_6.png").texture
-                    self.angle = 60
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 207:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_7.png").texture
-                    self.angle = 70
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 208:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_8.png").texture
-                    self.angle = 0
+                    self.angle = cv
+                    print("Kąt obrotu: ", cv)
                 elif num == 209:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_9.png").texture
+                    self.angle = cv
 
         #WARTOSCI OD 10 DO 99 KM/H
             elif num >= 210 and num <= 299:
                 predkosc = num - 200
                 if predkosc >= 90:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_9.png").texture
+                    self.angle = cv
                 elif predkosc >= 80:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_8.png").texture
+                    self.angle = cv
                 elif predkosc >= 70:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_7.png").texture
+                    self.angle = cv
                 elif predkosc >= 60:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_6.png").texture
+                    self.angle = cv
                 elif predkosc >= 50:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_5.png").texture
+                    self.angle = cv
                 elif predkosc >= 40:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_4.png").texture
+                    self.angle = cv
                 elif predkosc >= 30:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_3.png").texture
+                    self.angle = cv
                 elif predkosc >= 20:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_2.png").texture
+                    self.angle = cv
                 elif predkosc >= 10:
                     self.speed_texture10 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_1.png").texture
+                    self.angle = cv
             #JEDNOSCI DLA WARTOSCI OD 10 DO 99 KM/H
                 jednosci = predkosc % 10
                 if jednosci == 0:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_0.png").texture
+                    self.angle = cv
                 elif jednosci == 1:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_1.png").texture
+                    self.angle = cv
                 elif jednosci == 2:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_2.png").texture
+                    self.angle = cv
                 elif jednosci == 3:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_3.png").texture
+                    self.angle = cv
                 elif jednosci == 4:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_4.png").texture
+                    self.angle = cv
                 elif jednosci == 5:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_5.png").texture
+                    self.angle = cv
                 elif jednosci == 6:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_6.png").texture
+                    self.angle = cv
                 elif jednosci == 7:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_7.png").texture
+                    self.angle = cv
                 elif jednosci == 8:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_8.png").texture
+                    self.angle = cv
                 elif jednosci == 9:
                     self.speed_texture1 = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\speed_9.png").texture
+                    self.angle = cv
         #KIERUNKOWSKAZY
             elif num == 51: #prawy kierunkowskaz on
                 self.turn_right = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\kturn_right.png").texture
@@ -168,7 +205,7 @@ class Tribe(Widget, App):
             elif num == 61: # lewy kierunkowskaz on
                 self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\kturn_left.png").texture
             elif num == 60: #lewy kierunkowskaz off
-                self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_right.jpg").texture
+                self.turn_left = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\empty_turn_left.jpg").texture
         #ŚWIATŁA
             elif num == 71: #włącz światła
                 self.light_day = Image(source="D:\Projekty\wyswietlacz_samochodowy\png\lights.png").texture
@@ -178,7 +215,10 @@ class Tribe(Widget, App):
             elif num >= 300 and num <= 399:
                 pass
         #KĄT OBROTU
-
+            elif num >= 1000 and num <= 1360:
+                katOtrzymany = num - 1000
+                print("Odczytany kąt: ", katOtrzymany)
+                cv = katOtrzymany
         #NIEZNANA WIADOMOSC
             else:
                 pass
