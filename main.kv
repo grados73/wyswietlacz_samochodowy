@@ -1,4 +1,3 @@
-
 FloatLayout:
     tribe:  tribe
     background: background
@@ -24,6 +23,12 @@ FloatLayout:
                 size: 90, 110
                 pos: 860, 60
                 texture: self.tribe_textureR
+            PushMatrix
+            Rotate:
+                angle: self.angle
+                origin: self.center
+                axis: (0, 0, 1)
+                origin: 512, 300
             Rectangle:
                 size: 180, 320
                 pos: 518, 141
@@ -32,6 +37,7 @@ FloatLayout:
                 size: 180, 320
                 pos: 328, 141
                 texture: self.speed_texture10
+            PopMatrix
             Rectangle:
                 size: 49, 45
                 pos: 45, 50
@@ -60,3 +66,4 @@ FloatLayout:
                 size:   30, 52
                 pos:    145, 466
                 texture: self.distance1
+
