@@ -29,3 +29,4 @@ while True:
         if (oldNum != num): ##jezli sie cos zmienilo
             print(num)
             oldNum = num
+## ZMIANA w GITHUB
