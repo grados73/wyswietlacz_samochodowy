@@ -8,7 +8,6 @@
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General info
@@ -19,17 +18,22 @@ together with the steering wheel rotation, so that the displayed speed was alway
 
 ## Screenshots
 ![AIM](./png/calosc.png)
+![Done](./png/wyswietlacz_1.jpg)
 
 ## Technologies
 * Kivy - version 2.0.0
 * Python - version 3.9
 * Raspberry Pi OS Kernel - version 5.4
+* PyCharm - version 2020.2.5
+* RPi 3B+
 
 ## Setup
 https://kivy.org/doc/stable/gettingstarted/installation.html
 
+
 ## Code Examples
-Will be added.
+![Done](./png/code1.bmp)
+![Done](./png/code2.bmp)
 
 ## Features
 List of features ready and TODOs for future development
@@ -45,4 +49,5 @@ To-do list:
 Project is finished for this version of prototype, probably in next version it will be done on STM32, acording to long time to start Raspberry Pi OS and huge power consumptions.
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+Created by https://www.linkedin.com/in/kamil-gradowski-8706991aa , gradowski.kam@gmail.com- feel free to contact me!
+grados73
