@@ -20,6 +20,8 @@ together with the steering wheel rotation, so that the displayed speed was alway
 ![AIM](./png/calosc.png)
 ![Done](./png/wyswietlacz_1.jpg)
 
+Video: https://youtu.be/UKCcZLCUUvA
+
 ## Technologies
 * Kivy - version 2.0.0
 * Python - version 3.9
