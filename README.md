@@ -11,7 +11,7 @@
 * [Contact](#contact)
 
 ## General info
-My task in this project was to create a software to display that will show information such as the car current speed, 
+My task in this project was to create a software to display that will show information such as the car's current speed, 
 drive tribe, activity of lights and indicators, battery capacity or car range.
 Because the display was supposed to be on the steering wheel, the main challenge was the functionality of rotating the displayed speed value 
 together with the steering wheel rotation, so that the displayed speed was always vertical.
